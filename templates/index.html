@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Detection - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Welcome to Cancer Detection System</h1>
+        <p>Upload your X-ray image to detect cancer and its stage.</p>
+
+        <form class="p-3 text-center" action="/predict" method="POST" enctype="multipart/form-data">
+            <label for="xray_image">Upload X-ray Image:</label>
+            <input class="form-control" type="file" name="imagefile" id="xray_image" accept="image/*" required>
+
+            <label for="cancer_type">Select Cancer Type:</label>
+            <select name="cancer_type" id="cancer_type" required>
+                <option value="brain">Brain Cancer</option>
+                <option value="bone">Bone Cancer</option>
+                <option value="breast">Breast Cancer</option>
+            </select>
+
+            <button type="submit" class="btn btn-primary mt-3">Detect Cancer</button>
+        </form>
+
+        {% if prediction %}
+            <p class="text-center">Image is a {{ prediction }}</p>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Cancer Detection System. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
